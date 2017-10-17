@@ -1,5 +1,6 @@
 //////////////////////// Finish All at Tuesday, October 3rd, 2017 19h30 //////////////////////// 
 //////////////////////// Fixing All bugs at Wednesday, October 4th, 18h30 ////////////////////////
+#include "chat.h"
 
 
 /* Learn new conversation Function */

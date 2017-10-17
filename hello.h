@@ -4,7 +4,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <fstream>
-#include <hello.h>
+
 
 // Create macro
 #define USER "[Boss ] : "

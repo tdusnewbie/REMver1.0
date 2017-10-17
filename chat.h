@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-#include <chat.h>
+
 
 // Create macro
 #define REM_SYS "[REM 1.0] : "

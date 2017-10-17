@@ -1,5 +1,6 @@
 ////////////////////// Finish all at Thursday,September 28th 2017, 22:00 ////////////////////////
 ////////////////////// Fixing all bugs at Thursday,September 28th 2017, 23:30 ////////////////////////
+#include "hello.h"
 
 
 /*Support Function*/
