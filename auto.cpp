@@ -7,19 +7,29 @@
 
 // Taking time Function (by second and from 0h0m0m0year to now)
 
-unsigned int takeTime()
+int takeTime()
 {
 	time_t timer;
 	time(&timer);
 	return timer;
 }
 
+//Taking curent hours function
 
+int takeHours()
+{
+	time_t timer;
+	time(&timer);
+	struct tm *take;
+	take = localtime(&timer);
+	int hours = take->tm_hour;
+	return hours;
+}
 // Calculating and Setting Delay time Fuction
 
-bool setDelay(unsigned int orginal, unsigned int timeDelay)
+bool setDelay(int orginal, int timeDelay)
 {
-	unsigned int current = takeTime();
+	int current = takeTime();
 	if(current - orginal >= timeDelay) // If condition is right
 	{
 		orginal = current;// orginal time will be overloadding by current time
@@ -32,7 +42,7 @@ bool setDelay(unsigned int orginal, unsigned int timeDelay)
 // Convert from (dd/mm/yyyy, hh:mm:ss) to second (begin at 0:0:00 0/0/1900)
 // This function is created to save time simplier than save all string dd/mm/yyyy, hh:mm
 // Howevver, this will make developer feel so hard when connect to file and get data in file 
-unsigned int convertTimeToSecond(unsigned int days, unsigned int months, unsigned int years, unsigned int hours, unsigned int minutes)
+int convertTimeToSecond(int days, int months, int years, int hours, int minutes)
 {
 	time_t timer;
 	struct tm *timeSet;
@@ -46,7 +56,7 @@ unsigned int convertTimeToSecond(unsigned int days, unsigned int months, unsigne
 	timeSet->tm_hour = hours -1;
 	timeSet->tm_min = minutes;
 	// Covert time to seconds
-	unsigned int convertTime = mktime(timeSet);
+	int convertTime = mktime(timeSet);
 	// After that .... function will return second it have coverted
 	return convertTime;
 }
@@ -57,7 +67,7 @@ unsigned int convertTimeToSecond(unsigned int days, unsigned int months, unsigne
 
 // Sleep Early Function(Auto Shutdown system to make user go to sleep early)
 
-void sleepEarly(unsigned int &hours,unsigned int &orginal, int &numAdvice)
+void sleepEarly(int &hours,int &orginal, int &numAdvice)
 {
 	if(hours >=0 && hours <= 3) // if from 0h to 3h, you still working
 	{
@@ -280,7 +290,7 @@ void givePlanAdvice(int &orginalSet)
 
 // Auto sleep computer function (If you work over 2 hours ... System will auto sleep to give you time to relax)
 
-void autoSleep(unsigned int &orginalBegin)
+void autoSleep(int &orginalBegin)
 {
 	/// This problem must be solved by multiProcessing 
 	/// May be at that time i think that we need to divide our program to two or three process
@@ -291,7 +301,7 @@ void autoSleep(unsigned int &orginalBegin)
 
 // Auto give some basic advices (time to come back home, or time to have lunch, etc)
 
-void autoGiveAdvice(unsigned int &hours)
+void autoGiveAdvice(int &hours)
 {
 	// System will auto recognize the current hour and give some suggestion for this time randomly
 	if(hours == 12)// At lunch
@@ -322,7 +332,7 @@ void autoGiveAdvice(unsigned int &hours)
 
 /*Main function (use to fix bug)*/
 
-int main()
+/*int main()
 {
 	return 0;
-}
+}*/

@@ -11,11 +11,12 @@
 
 using namespace std;
 
-unsigned int takeTime();
-bool setDelay(unsigned int orginal, unsigned int timeDelay);
-unsigned int convertTimeToSecond(unsigned int days, unsigned int months, unsigned int years, unsigned int hours, unsigned int minutes);
-void sleepEarly(unsigned int &hours,unsigned int &orginal, int &numAdvice);
+int takeTime();
+int takeHours();
+bool setDelay(int orginal, int timeDelay);
+int convertTimeToSecond(int days, int months, int years, int hours, int minutes);
+void sleepEarly(int &hours,int &orginal, int &numAdvice);
 void setTimeForPlan(string command);
 void givePlanAdvice(int &orginalSet);
-void autoSleep(unsigned int &orginalBegin);
-void autoGiveAdvice(unsigned int &hours);
+void autoSleep(int &orginalBegin);
+void autoGiveAdvice(int &hours);

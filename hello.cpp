@@ -25,7 +25,7 @@ bool checkTypeSentences(string command)
 
 
 // Classify and check command with current time (Ex: "good morning" is true at morning) 
-bool checkTimeWithCommand(string command, unsigned int hours)
+bool checkTimeWithCommand(string command, int hours)
 {
 	vector <string> temp;
 	temp.push_back("good morning");
@@ -44,7 +44,7 @@ bool checkTimeWithCommand(string command, unsigned int hours)
 
 /*Say Hello Function*/
 //When system recieves hello sentence from user ... it will answer this one by special or normal way
-void sayHello(string &command, unsigned int &hours)
+void sayHello(string &command, int &hours,bool &executeHello) // executeHello use to check if User's command has existed in file or not
 {
 	// Connect and read file helloINPUT.txt and helloOUTPUT.txt 
 	ifstream output ("/root/REMver1.0/REMfile/helloOUTPUT.txt");
@@ -72,6 +72,7 @@ void sayHello(string &command, unsigned int &hours)
 				srand(time(NULL));
 				int ran = rand()% + outPut.size();
 				cout << REM_SYS << outPut.at(ran) << endl;
+				executeHello = true;
 			}
 			if(command == temp && checkType == true)
 			{			
@@ -96,7 +97,7 @@ void sayHello(string &command, unsigned int &hours)
 					int ran = rand()% + outputSpecial.size();
 					cout << REM_SYS << outputSpecial.at(ran) <<endl;
 				}
-
+				executeHello =true;
 			}
 		}
 		// After that .... finish hello process and close file helloINPUT.txt
