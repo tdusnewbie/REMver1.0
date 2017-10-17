@@ -1,21 +1,6 @@
 //////////////////////// Finish All at Tuesday, October 3rd, 2017 19h30 //////////////////////// 
 //////////////////////// Fixing All bugs at Wednesday, October 4th, 18h30 ////////////////////////
-#include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <cstring>
-#include <unistd.h>
-#include <stdlib.h>
-#include <time.h>
-#include <chat.h>
 
-// Create macro
-#define REM_SYS "[REM 1.0] : "
-#define USER "[Boss] : "
-
-
-using namespace std;
 
 /* Learn new conversation Function */
 //At this function ... system will allow user to teach program some new conversation if it can not find suitable answer for user's command

@@ -1,19 +1,6 @@
 ////////////////////// Finish all at Thursday,September 28th 2017, 22:00 ////////////////////////
 ////////////////////// Fixing all bugs at Thursday,September 28th 2017, 23:30 ////////////////////////
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <time.h>
-#include <stdlib.h>
-#include <fstream>
-#include <hello.h>
-
-// Create macro
-#define USER "[Boss ] : "
-#define REM_SYS "[REM 1.0] : "
-
-using namespace std;
 
 /*Support Function*/
 //Function in here use to support for say Hello function and some task for main function
@@ -53,7 +40,9 @@ bool checkTimeWithCommand(string command, unsigned int hours)
 		return false;
 }
 
-//Say hello function (When system recieves hello sentence from user ... it will answer this one by special or normal way)
+
+/*Say Hello Function*/
+//When system recieves hello sentence from user ... it will answer this one by special or normal way
 void sayHello(string &command, unsigned int &hours)
 {
 	// Connect and read file helloINPUT.txt and helloOUTPUT.txt 

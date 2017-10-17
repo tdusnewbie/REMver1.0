@@ -1,18 +1,6 @@
 /////////////// Finish all at Monday,October 16th, 2017 15h30p /////////////////////
-/////////////// Fixing All bugs at .......... ////////////////////
+/////////////// Fixing All bugs at ........................... /////////////////////
 
-#include <iostream>
-#include <unistd.h>
-#include <ctime>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <fstream>
-
-#define REM_SYS "[REM 1.0] : "
-#define USER "[Boss] : "
-
-using namespace std;
 
 /*Support Functions */
 
