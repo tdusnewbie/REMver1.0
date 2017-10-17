@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
+#include <fstream>
 
 #define REM_SYS "[REM 1.0] : "
 #define USER "[Boss] : "
@@ -54,7 +55,7 @@ unsigned int convertTimeToSecond(unsigned int days, unsigned int months, unsigne
 	timeSet->tm_mon = months -1;
 	timeSet->tm_year = years -1900;
 	timeSet->tm_hour = hours -1;
-	timeSet->tm_minute = minutes;
+	timeSet->tm_min = minutes;
 	// Covert time to seconds
 	unsigned int convertTime = mktime(timeSet);
 	// After that .... function will return second it have coverted
@@ -71,9 +72,9 @@ void sleepEarly(unsigned int &hours,unsigned int &orginal, int &numAdvice)
 {
 	if(hours >=0 && hours <= 3) // if from 0h to 3h, you still working
 	{
-		bool check = setDelay(orginal,300) /// check time to give advice again
+		bool check = setDelay(orginal,300); /// check time to give advice again
 		{
-			cout << REM_SYS << "Hmmm !!! "<< endl
+			cout << REM_SYS << "Hmmm !!! "<< endl;
 			sleep(2);
 			vector <string> adviceSleepFirst;
 			vector <string> adviceSleepSecond;
@@ -103,7 +104,7 @@ void sleepEarly(unsigned int &hours,unsigned int &orginal, int &numAdvice)
 			cout << USER ;
 			string answer;
 			getline(std::cin, answer);
-			if(answer.find("yes") != npos || answer.find("ok") != npos) // If user agree with system's suggestion
+			if(answer.find("yes") != std::string::npos || answer.find("ok") != std::string::npos) // If user agree with system's suggestion
 			{
 				cout << REM_SYS << "Love you !!! Good night and have a best wish !! ^^" << endl;
 				system("shutdown -h now");
@@ -136,7 +137,7 @@ void sleepEarly(unsigned int &hours,unsigned int &orginal, int &numAdvice)
 void setTimeForPlan(string command)
 {
 	// Recognize words in command user provide ... If Those words exist in user's command
-	if(command.find("set time ") != npos || command.find("call me at ") != npos || command.find("advice ") != npos)
+	if(command.find("set time ") != std::string::npos || command.find("call me at ") != std::string::npos || command.find("advice ") != std::string::npos)
 	{ 
 		// Ask user again to sure that him/her want to set time or not
 		cout << REM_SYS << "You wanna set time for your plan , Right ????? (Y/n) : " << endl;
@@ -157,7 +158,7 @@ void setTimeForPlan(string command)
 				setDays+="/";
 				cout << REM_SYS << "Well !!!! ...... " << endl;
 				sleep(1);
-				cout << REM_SYS << "Ok !!! So Can you tell me What time your plan is going on (hh:mm => 24h Type) : ") << endl;
+				cout << REM_SYS << "Ok !!! So Can you tell me What time your plan is going on (hh:mm => 24h Type) : " << endl;
 				cout << USER ;
 				getline(std::cin, setHours);
 				setHours+=":";
@@ -183,24 +184,25 @@ void setTimeForPlan(string command)
 					size_t flag = 0;
 					size_t pos = setDays.find_first_of("/");
 					vector <int> dates;
-					while(pos != npos) // classify day, month, year
+					while(pos != std::string::npos) // classify day, month, year
 					{
-						date.push_back(stoi(setDays.substr(flag,pos-flag)));
+						dates.push_back(stoi(setDays.substr(flag,pos-flag)));
 						flag = pos +1;
 						pos = setDays.find_first_of("/",pos + 1);
 					}
 					flag = 0;
 					pos = setHours.find_first_of(":");
-					while(pos != npos) // classify hour, minute
+					while(pos != std::string::npos) // classify hour, minute
 					{
-						date.push_back(stoi(setHours.substr(flag,pos-flag)));
+						dates.push_back(stoi(setHours.substr(flag,pos-flag)));
 						flag = pos +1;
 						pos = setHours.find_first_of(":",pos + 1);
 
 					}
 					// after classifying, covert all into seconds
-					int covertSecond = convertTimeToSecond(date.at(1),date.at(2),date.at(3),date.at(4),date.at(5),date.at(6));
-					string convertSecondString += covertSecond;
+					int covertSecond = convertTimeToSecond(dates.at(0),dates.at(1),dates.at(2),dates.at(3),dates.at(4));
+					string convertSecondString;
+					convertSecondString += covertSecond;
 					cout << REM_SYS << "Well ..... "<< endl;
 					sleep(1);
 					vector <string> finishedSetPlan;
@@ -255,7 +257,7 @@ void givePlanAdvice(int &orginalSet)
 				int numExc = 0;
 				size_t flag = 0;
 				size_t pos = temp.find_first_of("_");
-				while(pos != npos ) // Because I want this program is more flexible, I have added time string user input above at the end of this message
+				while(pos != std::string::npos ) // Because I want this program is more flexible, I have added time string user input above at the end of this message
 				{
 					// system will divide string content message into two part .... 
 					if(numExc <1)
@@ -266,7 +268,7 @@ void givePlanAdvice(int &orginalSet)
 					else
 						timePlan = temp.substr(flag,pos-flag); // Another one will content time string
 					flag = pos +1;
-					pos = setDays.find_first_of("_",pos + 1);
+					pos = temp.find_first_of("_",pos + 1);
 
 				}
 				check = false;
@@ -275,7 +277,7 @@ void givePlanAdvice(int &orginalSet)
 			rows++ ;
 		}
 		// After classifying... system will give advice like below 
-		if(timePlan != npos && message != npos)
+		if(timePlan != "" && message != "")
 		{
 			cout << REM_SYS <<"Hmmm !!! " << endl;
 			sleep(2);
@@ -302,7 +304,8 @@ void autoSleep(unsigned int &orginalBegin)
 
 void autoGiveAdvice(unsigned int &hours)
 {
-	if(hours == 12)
+	// System will auto recognize the current hour and give some suggestion for this time randomly
+	if(hours == 12)// At lunch
 	{
 		vector <string> careLunch;
 		careLunch.push_back("Nows is noon ... I thinks that It's time to have lunch !!!! Let suspend your LAPTOP and relax !!! ^^ ");
@@ -310,9 +313,9 @@ void autoGiveAdvice(unsigned int &hours)
 		careLunch.push_back("I'm hungry !!!!! I'm wanna eat !!!! it's 12 o'clock !!!! T.T");
 		srand(time(NULL));
 		int ran = rand() % careLunch.size();
-		cout << REM_SYS << careLunch <<endl;
+		cout << REM_SYS << careLunch.at(ran) <<endl;
 	}
-	else if( hours >= 17 && hours <= 18)
+	else if( hours >= 17 && hours <= 18)// At dinner 
 	{
 		cout << REM_SYS << "Hmmm !!!! " <<endl;
 		sleep(2);
