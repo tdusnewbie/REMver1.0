@@ -1,4 +1,4 @@
-////////////// Finish all at Tuesday, October 18th, 2017 23:59 //////////////// 
+////////////// Finish all at Tuesday, October 18th, 2017 23:59 ////////////////
 ////////////// Finish Fix bugs and run program at Wednesday, October 19th, 2017 14:50 ////////////////
 
 #include "auto.h"
@@ -11,7 +11,8 @@ int main()
 	int orginalSet = takeTime(); //take original time for set time funtion
 	int orginalShutdown = takeTime(); // take orginal time for sleep early function
 	string commandUser;
-	int numAdvice =0;
+	int numAdviceShutdown =0;
+	int numOfAdviceSuspend = 1;
 	bool executeHello;
 	cin.ignore();
 	while(1)
@@ -19,7 +20,7 @@ int main()
 		executeHello = false;
 		int hours = takeHours();
 		givePlanAdvice(orginalSet);
-		sleepEarly(hours,orginalShutdown,numAdvice);
+		sleepEarly(hours,orginalShutdown,numAdviceShutdown);
 		autoGiveAdvice(hours);
 		cout << USER;
 		getline(std::cin, commandUser);

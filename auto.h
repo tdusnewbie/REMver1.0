@@ -18,5 +18,5 @@ int convertTimeToSecond(int days, int months, int years, int hours, int minutes)
 void sleepEarly(int &hours,int &orginal, int &numAdvice);
 void setTimeForPlan(string command);
 void givePlanAdvice(int &orginalSet);
-void autoSleep(int &orginalBegin);
+void autoSleep(int &orginalBegin, int &hours, int &numofAdvice);
 void autoGiveAdvice(int &hours);

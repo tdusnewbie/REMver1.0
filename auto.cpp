@@ -35,13 +35,13 @@ bool setDelay(int orginal, int timeDelay)
 		orginal = current;// orginal time will be overloadding by current time
 		return true; // then ... function will return value TRUE
 	}
-	else // if condition is wrong 
+	else // if condition is wrong
 		return false; // function will reuturn value FALSE
 }
 
 // Convert from (dd/mm/yyyy, hh:mm:ss) to second (begin at 0:0:00 0/0/1900)
 // This function is created to save time simplier than save all string dd/mm/yyyy, hh:mm
-// Howevver, this will make developer feel so hard when connect to file and get data in file 
+// Howevver, this will make developer feel so hard when connect to file and get data in file
 int convertTimeToSecond(int days, int months, int years, int hours, int minutes)
 {
 	time_t timer;
@@ -137,7 +137,7 @@ void setTimeForPlan(string command)
 {
 	// Recognize words in command user provide ... If Those words exist in user's command
 	if(command.find("set time ") != std::string::npos || command.find("call me at ") != std::string::npos || command.find("advice ") != std::string::npos)
-	{ 
+	{
 		// Ask user again to sure that him/her want to set time or not
 		cout << REM_SYS << "You wanna set time for your plan , Right ????? (Y/n) : " << endl;
 		char choose;
@@ -216,7 +216,7 @@ void setTimeForPlan(string command)
 					putFile << setMessages << endl;
 					// close file after finishing set time
 					putFile.close();
-				}	
+				}
 			} while(choose == 'n'||choose == 'N');
 		}
 		else // If user say N(no) .... it means they don't wanna set time .... so system must pass this function
@@ -258,7 +258,7 @@ void givePlanAdvice(int &orginalSet)
 				size_t pos = temp.find_first_of("_");
 				while(pos != std::string::npos ) // Because I want this program is more flexible, I have added time string user input above at the end of this message
 				{
-					// system will divide string content message into two part .... 
+					// system will divide string content message into two part ....
 					if(numExc <1)
 					{
 						message = temp.substr(flag,pos-flag); // One part will content message
@@ -275,7 +275,7 @@ void givePlanAdvice(int &orginalSet)
 			}
 			rows++ ;
 		}
-		// After classifying... system will give advice like below 
+		// After classifying... system will give advice like below
 		if(timePlan != "" && message != "")
 		{
 			cout << REM_SYS <<"Hmmm !!! " << endl;
@@ -290,13 +290,37 @@ void givePlanAdvice(int &orginalSet)
 
 // Auto sleep computer function (If you work over 2 hours ... System will auto sleep to give you time to relax)
 
-void autoSleep(int &orginalBegin)
+void autoSleep(int &orginalBegin, int &hours, int &numofAdvice)
 {
-	/// This problem must be solved by multiProcessing 
+	/// This problem must be solved by multiProcessing
 	/// May be at that time i think that we need to divide our program to two or three process
 	/// One Part will manage time and auto function and another one will mange chat.cpp hello.cpp
 	/// May be we will have or must be create some process managing picture and some animated effect
-	/// they will help us easily manage our program better and better 
+	/// they will help us easily manage our program better and better
+	bool check = setDelay(orginalBegin,7200);
+	if(check == true && hours >3 && numofAdvice <2)
+	{
+		std::vector<std::string> suspendForRelax;
+		suspendForRelax.push_back("Hmm !!!! You have sit here so long time .... It's more 2 hours .... So I think you need to relax a bit .... which is very helpful for your health !! ^^");
+		suspendForRelax.push_back("Relax after 2 hours working is very helpful for you .... It will protect your health so much !!! " );
+		suspendForRelax.push_back("Oh dear .... Don't sit here so long time .... Let go out and play sport to lose your weight and pay attention to your work more !!! ^^");
+		suspendForRelax.push_back("I'm not fun if your health will become worse and worse .... take a rest a bit !!! @@");
+		srand(time(NULL));
+		int ran = rand() % suspendForRelax.size();
+		cout << REM_SYS << suspendForRelax.at(ran);
+		numofAdvice++;
+	}
+	if (check == true && hours >3 && numofAdvice >=2)
+	{
+		std::vector<std::string> forceSuspend;
+		forceSuspend.push_back("Well !! If My suggestions have not influence on you .... I must use Violent measures ... Sorry If I make you angry !!! :( ");
+		forceSuspend.push_back("Hmm !!! Maybe Force measures will have influence on you ..... Sorry for all .... I just do it for your health !!! ");
+		forceSuspend.push_back("OK !!! Fine  ..... I will suspend your computer right now !!! ");
+		srand(time(NULL));
+		int ran = rand() % forceSuspend.size();
+		cout << REM_SYS << forceSuspend.at(ran);
+	}
+
 }
 
 // Auto give some basic advices (time to come back home, or time to have lunch, etc)
@@ -314,7 +338,7 @@ void autoGiveAdvice(int &hours)
 		int ran = rand() % careLunch.size();
 		cout << REM_SYS << careLunch.at(ran) <<endl;
 	}
-	else if( hours >= 17 && hours <= 18)// At dinner 
+	else if( hours >= 17 && hours <= 18)// At dinner
 	{
 		cout << REM_SYS << "Hmmm !!!! " <<endl;
 		sleep(2);
