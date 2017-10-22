@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <signal.h>
 
 #define REM_SYS "[REM 1.0] : "
 #define USER "[Boss] : "

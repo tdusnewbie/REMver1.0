@@ -1,4 +1,4 @@
-//////////////////////// Finish All at Tuesday, October 3rd, 2017 19h30 //////////////////////// 
+//////////////////////// Finish All at Tuesday, October 3rd, 2017 19h30 ////////////////////////
 //////////////////////// Fixing All bugs at Wednesday, October 4th, 18h30 ////////////////////////
 #include "chat.h"
 
@@ -22,13 +22,13 @@ void saveFileInPut(ofstream &file, string &command)
 		{
 			break;
 		}
-		else if(choose == 1) //If choose is 1 .... user can input different type of this command 
+		else if(choose == 1) //If choose is 1 .... user can input different type of this command
 		{
-			cin.ignore(); 
+			cin.ignore();
 			cout << REM_SYS << "PLease enter your statement : " << endl;
 			cout << USER ;
 			getline(std::cin,temp);
-			command += temp;  
+			command += temp;
 		}
 		else // If choose is not 1 and 0 ... system will understand that user choose 0
 		{
@@ -74,7 +74,7 @@ void saveFileOutPut(ofstream &file)
 			getline(std::cin,temp3);
 			temp2 += temp3;
 		}
-		else 
+		else
 		{
 			cout << REM_SYS << "Your choise has not existed in my suggestions .. So i will run with choose is 0 !!! ^^ "<<endl;
 			temp2 += '_';
@@ -88,15 +88,15 @@ void saveFileOutPut(ofstream &file)
 void learnNewConversation(string &command)
 {
 	// Connect and eopen two file chatINPUT.txt and chatOUTPUT.txt
-	ofstream putFileInPut ("/root/REMver1.0/REMfile/chatINPUT.txt",ios::app); 
-	ofstream putFileOutPut ("/root/REMver1.0/REMfile/chatOUTPUT.txt",ios::app); 
+	ofstream putFileInPut ("/root/REMver1.0/REMfile/chatINPUT.txt",ios::app);
+	ofstream putFileOutPut ("/root/REMver1.0/REMfile/chatOUTPUT.txt",ios::app);
 
 	// If user wanna teach program new conversation ... system will run two function below
 	saveFileInPut(putFileInPut,command);
 	saveFileOutPut(putFileOutPut);
 	cout << REM_SYS << "Hmmmm !!! ........... " << endl;
 	sleep(2);
-	//Create some answer's type when finish teaching 
+	//Create some answer's type when finish teaching
 	vector <string> outputAfterLearn;
 	outputAfterLearn.push_back("Wow !!! Today I have been able to learn so much !!!! Love you so much ... My Boss !! ");
 	outputAfterLearn.push_back("I believe in that what you have taught me today will be very helpful for me in the future !!!! ^^ ");
@@ -120,7 +120,7 @@ int recognizeInPut(string command)
 	int rowsInPut = 0;
 	// Connect and open file chatINPUT.txt
 	ifstream getFileInPut ("/root/REMver1.0/REMfile/chatINPUT.txt");
-	if(getFileInPut.is_open()); // If that file exists 
+	if(getFileInPut.is_open()); // If that file exists
 	{
 		while(getline(getFileInPut,tempAll)) //Check and find in chatINPUT.txt sentence is same as User's command
 		{
@@ -132,8 +132,8 @@ int recognizeInPut(string command)
 				return rowsInPut; // Close file and return number of row has that one
 			}
 		}
-		// If that command doesn't exist  
-		getFileInPut.close(); // close file and suggest user teaching this sentence 
+		// If that command doesn't exist
+		getFileInPut.close(); // close file and suggest user teaching this sentence
 		cout << REM_SYS << "Hmmm !! ........" <<endl;
 		sleep(2);
 		cout << REM_SYS << "Maybe ..... I don't know this statement ... So ... Can I learn this (1:Yes/0:No) ?????? "<<endl;
@@ -151,6 +151,7 @@ int recognizeInPut(string command)
 			string google = "googler ";
 			google += command;
 			system(google.c_str());
+			system("clear");
 			return 0;
 		}
 		else // If user's choice is not 0 or 1 ... system will understand this is 0
@@ -178,7 +179,7 @@ string takeStringOfRowInFile(ifstream &file, int rows)
 	{
 		if(tempRow<rows)
 			tempRow++;
-		else 
+		else
 			break;
 	}
 	return temp; // After execute above process ... system will return sentence has contented answer
@@ -224,11 +225,11 @@ string randomOutPut (int rowsInPut)
 		{
 			return 0;
 		}
-		else 
+		else
 		{
 			string temp = randomOutPut(rows);
 			cout << REM_SYS << temp << endl;
 		}
-	}	
+	}
 	return 0;
 }*/

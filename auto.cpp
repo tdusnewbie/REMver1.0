@@ -319,8 +319,8 @@ void autoSleep(int &orginalBegin, int &hours, int &numofAdvice)
 		srand(time(NULL));
 		int ran = rand() % forceSuspend.size();
 		cout << REM_SYS << forceSuspend.at(ran);
+		
 	}
-
 }
 
 // Auto give some basic advices (time to come back home, or time to have lunch, etc)

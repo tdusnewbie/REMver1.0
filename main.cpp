@@ -27,6 +27,7 @@ int main()
 		sayHello(commandUser,hours,executeHello);
 		if(executeHello == false)
 		{
+			setTimeForPlan(commandUser);
 			string answer;
 			int rowstoAnswer;
 			rowstoAnswer = recognizeInPut(commandUser);
